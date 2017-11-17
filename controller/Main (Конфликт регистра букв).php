@@ -4,27 +4,25 @@
   class Main {
     protected $data = array();
     protected $template = 'v_';
-    protected $lang;
+    protected $messages;
     const DIR_VIEW  = 'view/';
     const DIR_MODEL = 'model/';
-    const DIR_CSS   = self::DIR_CSS . 'css/';
-    const DIR_JS    = self::DIR_JS . 'js/';
+    const DIR_LANG = 'lang/';
+    const DIR_CSS   = self::DIR_VIEW . 'css/';
+    const DIR_JS    = self::DIR_VIEW . 'js/';
 
     function __construct ($name) {
 
       $this->template .= $name;
-      if (!preg_match('.php',$name)) {
+      if (!preg_match('[.php]',$name)) {
         $this->template .= '.php';
       }
 
-      if (!isset($_SESSION['lang'])) {
-        $this->lang = substr($_SERVER['HTTP_ACCEPT_LANGUAGE'],0,2);
-        $_SESSION['lang'] = $this->lang;
-      }
-      else {
-        $this->lang = $_SESSION['lang'];
-      }
+      require_once 'messages.php';
+    }
 
+    protected function getMessages() {
+      return $this->messages = Messages::getInstance()->getMessages();
     }
 
     protected function render() {
