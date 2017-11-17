@@ -1,3 +1,3 @@
 <div id="error_404">
-  <?=$not_found?>
+  <?=$text['not_found']?>
 </div>

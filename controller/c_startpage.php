@@ -1,6 +1,6 @@
 <?php
 
-  class C_404NotFound extends Main {
+  class C_Startpage extends Main {
 
     function __construct ($name) {
       parent::__construct($name);
@@ -8,9 +8,13 @@
     }
 
     function index() {
+
       $text = $this->getMessages();
 
-      $this->data['text']['not_found'] = $text['404_NotFound'];
+      $this->data['text']['find_the_pair']  = $text['find_the_pair'];
+      $this->data['text']['start']          = $text['start'];
+
       $this->render();
     }
+
   }
