@@ -65,12 +65,11 @@ body {
     cursor: pointer;
 }
 
-#menu, #header-separator, #player-text, #player-name, #game-time, #score, #score-count {
+#menu, #header-separator, #player-text, #player-name, #score, #score-count {
     top: 50%;
     transform: translateY(-50%);
     display: inline-block;
     position: relative;
-    /*top: 0px;*/
 }
 
 #menu, #player-text, #player-name, #header-separator {
@@ -96,7 +95,6 @@ body {
 }
 
 #menu-text {
-    /*margin-top: 7px !important;*/
     top: 50%;
     transform: translateY(-50%);
     left: 40px;
@@ -122,11 +120,23 @@ body {
 }
 
 #game-time-text, #game-time-num, #game-time-min, #game-time-separator, #game-time-sec {
-    float: left;
+    display: inline-block;
+}
+
+#game-time {
+    top: 50%;
+    transform: translateY(-50%);
+    text-align: center;
+    position: absolute;
+    width: 100%;
 }
 
 #game-time-text {
     margin-left: 50px;
+}
+
+#game-time-num {
+    margin-left: 10px;
 }
 
 #score, #score-count {
@@ -329,4 +339,52 @@ div.card {
     -webkit-box-shadow: 0px 0px 5px #aaa;
     -moz-box-shadow:  0px 0px 5px #aaa;
     box-shadow:  0px 0px 5px #aaa;
+}
+
+.card1 {
+    background: #ffffff;
+}
+
+.card2 {
+    background: #000000;
+}
+
+.card3 {
+    background: #0bb31f;
+}
+
+.card4 {
+    background: #000e7d;
+}
+
+.card5 {
+    background: #f0e200;
+}
+
+.card6 {
+    background: #ac1000;
+}
+
+.card7 {
+    background: #00b4a9;
+}
+
+.card8 {
+    background: #ce00c5;
+}
+
+.card9 {
+    background: #6829ff;
+}
+
+.card10 {
+    background: #d59021;
+}
+
+.card11 {
+    background: #00380c;
+}
+
+.card12 {
+    background: #41000c;
 }
