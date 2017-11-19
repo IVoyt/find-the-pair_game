@@ -1,5 +1,7 @@
 function tileFlip(front, back, mode) {
+
 	var len = front.length;
+
 	if (mode != 'back') {
 		for (var i = 0; i < len; i++) {
 			front[i].style.zIndex = 0;
@@ -14,16 +16,20 @@ function tileFlip(front, back, mode) {
 	}
 	else {
 		for (var i = 0; i < len; i++) {
-			front[i].style.zIndex = 3;
-			front[i].style.transform = '';
-			front[i].style.mozTransform = '';
-			front[i].style.webkitTransform = '';
+      if (!(back[i].classList.contains('opened'))) {
+        front[i].style.zIndex = 3;
+        front[i].style.transform = '';
+        front[i].style.mozTransform = '';
+        front[i].style.webkitTransform = '';
 
-			back[i].style.transform = '';
-			back[i].style.mozTransform = '';
-			back[i].style.webkitTransform = '';
+        back[i].style.transform = '';
+        back[i].style.mozTransform = '';
+        back[i].style.webkitTransform = '';
+      }
 		}
-		selectedTilesFront = [];
-		selectedTilesBack = [];
+    selTilesFront = [];
+    selTilesBack = [];
+    selTilesClass = [];
+		tileEventListener('add');
 	}
 }

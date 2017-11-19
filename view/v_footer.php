@@ -25,5 +25,6 @@
     <script src="<?=$js_dir?>select_language.js"></script>
     <script src="<?=$js_dir?>tile_click.js"></script>
     <script src="<?=$js_dir?>tile_flip.js"></script>
+    <script src="<?=$js_dir?>start_timer.js"></script>
   </body>
 </html>

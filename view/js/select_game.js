@@ -19,7 +19,7 @@ function selectGame () {
 		}, 300);
 
 		setTimeout(function() {
-			var playername = document.getElementById('select-game');;
+			var playername = document.getElementById('select-game');
 			playername.style.opacity = 1;
 		}, 700);
 	}
