@@ -2,17 +2,6 @@
 
   class M_Game extends DB {
 
-    function newGame($playerID, $field) {
-      if($stmt = $this->db->prepare("INSERT INTO game (player_id, field_id) VALUES (?,?)")) {
-        $stmt->bind_param("ii", $playerID, $field);
-        $stmt->execute();
-        $stmt->close();
-      } else {
-        $error = $this->db->errno . ' ' . $this->db->error;
-        echo $error;
-      }
-    }
-
     function getPlayerId($player) {
       $query = mysqli_query($this->db,
         "SELECT player_id
@@ -49,7 +38,7 @@
     }
 
     function getFieldSizeById($field_id) {
-      $query = mysqli_query($this->db, "SELECT fieldsize FROM field WHERE id = '". $field_id ."'");
+      $query = mysqli_query($this->db, "SELECT id, fieldsize FROM field WHERE id = '". $field_id ."'");
 
       return mysqli_fetch_assoc($query);
     }
@@ -57,7 +46,55 @@
     function getFieldSizes() {
       $query = mysqli_query($this->db, "SELECT * FROM field ORDER BY id");
 
-      return $query;
+      while ($row = mysqli_fetch_assoc($query)) {
+        $result[] = $row;
+      }
+
+      return $result;
+    }
+
+    function getHighscoresTotal() {
+      $highscores = [];
+      $query = mysqli_query($this->db,
+        "SELECT p.player_name, g.fieldsize, g.score
+                FROM game g
+                JOIN field f ON f.id = g.field_id
+                JOIN players p ON p.player_id = g.player_id
+                ORDER BY g.score DESC LIMIT 10");
+
+      while($row = mysqli_fetch_assoc($query)) {
+        $highscores[] = $row;
+      }
+
+      return $highscores;
+    }
+
+    function getHighscoresByFieldType($field_id) {
+      $highscores = [];
+      $query = mysqli_query($this->db,
+        "SELECT p.player_name, g.score
+                FROM game g
+                JOIN field f ON f.id = g.field_id
+                JOIN players p ON p.player_id = g.player_id
+                WHERE g.field_id = '". $field_id ."'
+                ORDER BY g.score DESC LIMIT 10");
+
+      while($row = mysqli_fetch_assoc($query)) {
+        $highscores[] = $row;
+      }
+
+      return $highscores;
+    }
+
+    function setPlayerScore($player_id, $field_id, $score) {
+      if($stmt = $this->db->prepare("INSERT INTO game (player_id, field_id, score) VALUES (?,?,?)")) {
+        $stmt->bind_param('iii', $player_id, $field_id, $score);
+        $stmt->execute();
+        $stmt->close();
+      } else {
+        $error = $this->db->errno . ' ' . $this->db->error;
+        echo $error;
+      }
     }
 
   }

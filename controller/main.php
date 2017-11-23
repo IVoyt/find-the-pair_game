@@ -11,10 +11,10 @@
     const DIR_CSS   = self::DIR_VIEW . 'css/';
     const DIR_JS    = self::DIR_VIEW . 'js/';
 
-    function __construct ($name) {
+    function __construct ($template_name) {
 
-      $this->template .= $name;
-      if (!preg_match('[.php]',$name)) {
+      $this->template .= $template_name;
+      if (!preg_match('[.php]',$template_name)) {
         $this->template .= '.php';
       }
 
