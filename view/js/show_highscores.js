@@ -16,20 +16,20 @@ function loadHighscores () {
 }
 
 function showHighscores () {
-  var content = document.getElementsByClassName('content');
+  var content = document.getElementById('main');
   var highscoresModal = document.getElementById('highscores-modal');
   var highscoresModalBg = document.getElementById('highscores-modal-bg');
   var highscoresModalStyle = getComputedStyle(highscoresModal);
 
   if (highscoresModalStyle.opacity == 0) {
-    highscoresModal.style.transform = 'scale(1,1)';
-    highscoresModal.style.opacity = '1';
+    highscoresModal.style.display = 'block';
+    setTimeout(function() {
+      highscoresModal.style.transform = 'scale(1,1)';
+      highscoresModal.style.opacity = '1';
+    }, 100);
     highscoresModalBg.style.display = 'block';
-    var contentElmLen = content.length;
-    for (var i = 0; i < contentElmLen; i++) {
-      content[i].style.filter = 'blur(2px) brightness(45%) grayscale(0.9)';
-      content[i].style.transition = 'filter 0.5s ease-out 0s';
-    }
+    content.style.transition = 'filter 0.5s ease 0s';
+    content.style.filter = 'blur(2px) brightness(45%) grayscale(0.9)';
     highscoresModalBg.addEventListener('click',closeModal,false);
   }
   else {
@@ -38,16 +38,16 @@ function showHighscores () {
 }
 
 function closeModal() {
-  var content = document.getElementsByClassName('content');
+  var content = document.getElementById('main');
   var highscoresModal = document.getElementById('highscores-modal');
   var highscoresModalBg = document.getElementById('highscores-modal-bg');
 
   highscoresModal.style.transform = '';
   highscoresModal.style.opacity = '';
   highscoresModalBg.style.display = '';
-  var contentElmLen = content.length;
-  for (var i = 0; i < contentElmLen; i++) {
-    content[i].style.filter = '';
-    content[i].style.transition = 'filter 0.5s ease-out 0s';
-  }
+  content.style.transition = 'filter 0.5s ease 0s';
+  content.style.filter = '';
+  setTimeout(function() {
+    highscoresModal.style.display = '';
+    }, 700);
 }

@@ -516,6 +516,7 @@ div.card {
     height: 80%;
     transform: scale(0.9,0.9);
     opacity: 0;
+    display: none;
     transition: transform 0.5s ease 0s, opacity 0.5s ease 0s;
     z-index: 10;
     padding: 0 10px 10px 10px;
@@ -530,7 +531,6 @@ div.card {
 
 #highscores-modal-header {
     padding: 15px;
-    /*background: #333;*/
 }
 
 #highscores-modal-content {
