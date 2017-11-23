@@ -11,8 +11,9 @@
       endfor;
     ?>
 
-    <input id="player_id" type="hidden" value="<?=$player_id?>">
-    <input id="field_size" type="hidden" value="<?=$field_size?>">
+    <input id="player-id" type="hidden" value="<?=$player_id?>">
+    <input id="field-size" type="hidden" value="<?=$field_size?>">
+    <input id="field-size-id" type="hidden" value="<?=$field_id?>">
   </div>
 
 </div>

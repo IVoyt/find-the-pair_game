@@ -26,10 +26,16 @@ function tileFlip(front, back, mode) {
         back[i].style.mozTransform = '';
         back[i].style.webkitTransform = '';
       }
+      else {
+        back[i].style.opacity = 0;
+      }
 		}
     selTilesFront = [];
     selTilesBack = [];
     selTilesClass = [];
-		tileEventListener('add');
+
+    if (triggerBtn.dataset['pause'] == '') {
+      tileEventListener('add');
+    }
 	}
 }

@@ -1,1 +1,1 @@
-# twin-image_game
+# Game "Find The Pair"

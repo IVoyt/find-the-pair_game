@@ -1,29 +1,10 @@
-tiles = document.getElementsByClassName('card');
-var timerVisible;
-var timerFlip;
-window.selTilesFront = [];
-window.selTilesBack = [];
-window.selTilesClass = [];
-
-function checkVisible () {
-	if (tiles.length != 0) {
-		clearTimeout(timerVisible);
-		tileEventListener('add');
-	}
-	else {
-		timerVisible = setTimeout(checkVisible,1000);
-	}
-}
-checkVisible();
-
 function tileEventListener(mode) {
-  console.log('mode is ' + mode);
   for (var i = 0; i < tiles.length; i++) {
 		if (mode == 'add') {
 			tiles[i].addEventListener('click', tileOnClick, false);
 		}
 		else {
-			tiles[i].removeEventListener('click', '', false);
+			tiles[i].removeEventListener('click', tileOnClick, false);
 		}
 	}
 }
@@ -33,31 +14,56 @@ function tileOnClick () {
 	var frontTile = document.getElementById(this.id);
 	frontTile.style.zIndex = 3;
 
-	function hasClass(element, cls) {
-		return (' ' + element.className + ' ').indexOf(' ' + cls + ' ') > -1;
-	}
-
 	for (var i = 0; i < childrenCount; i++) {
 		var child = this.parentNode.childNodes[i];
-		if (hasClass(child,'back')) {
+		if ((' ' + child.className + ' ').indexOf(' ' + 'back' + ' ') > -1) {
 			var backTile = child;
 		}
 	}
 
-  clearTimeout(timerFlip);
-  console.log('timeout should be cleared');
-  function checkClicked () {
-		if (frontTile.style.zIndex == 0) {
-			if (selTilesClass[0] != selTilesClass[1]) {
-			  console.log('if if');
-        clearTimeout(timerFlip);
-        console.log('timeout should be cleared');
-        tileFlip(selTilesFront, selTilesBack, 'back');
-			}
-			else if (selTilesClass[0] == selTilesClass[1]) {
-        console.log('else if');
-        clearTimeout(timerFlip);
-        console.log('timeout should be cleared');
+  if (selTilesFront.length < 2) {
+    frontTile.style.zIndex = 0;
+    selTilesFront.push(frontTile);
+    selTilesBack.push(backTile);
+    selTilesClass.push(backTile.dataset[ 'tile' ]);
+    tileFlip(selTilesFront, selTilesBack, '');
+
+    if (selTilesFront.length == 2) {
+      tileEventListener('remove');
+      tries++;
+      triesNum.innerHTML = tries;
+      console.log('Tries: ' + tries);
+      console.log('Found: ' + found);
+
+      if (selTilesClass[0] != selTilesClass[1]) {
+        clearTimeout(timerFlipBack);
+        timerFlipBack = setTimeout(function () {
+          tileFlip(selTilesFront, selTilesBack, 'back');
+        }, 2000);
+        lastTrie++;
+      }
+      else {
+        clearTimeout(timerFlipBack);
+        var fieldSize = document.getElementById('field-size');
+        found++;
+        foundNum.innerHTML = found + ' / ' + fieldSize.value;
+        console.log('Found: ' + found);
+
+        if (lastTrie == 0) {
+          score += (100 - tileOpenTime);
+        }
+        else {
+          if (lastTrie <= 9) {
+            score += ((100 - lastTrie * 10) - tileOpenTime);
+          }
+          else {
+            score += 10;
+          }
+        }
+
+        lastTrie = 0;
+        tileOpenTime = 0;
+        scoreNum.innerHTML = score;
 
         var selTilesBackLength = selTilesBack.length;
         for (var i = 0; i < selTilesBackLength; i++) {
@@ -66,28 +72,16 @@ function tileOnClick () {
             selTilesBack[i].className = hasClass + ' opened';
           }
         }
+        var stopGame = checkAllOpened();
+        if (stopGame == 1) {
+          stopTimer();
+        }
         tileFlip(selTilesFront, selTilesBack, 'back');
       }
-		}
-		else {
-      console.log('else');
-			frontTile.style.zIndex = 0;
-			timerFlip = setTimeout(checkClicked,2000);
-		}
-	}
-	checkClicked();
 
-	if (selTilesFront.length < 2) {
-    selTilesFront.push(frontTile);
-    selTilesBack.push(backTile);
-    selTilesClass.push(backTile.dataset[ 'tile' ]);
-    console.log(selTilesClass);
+      console.log('lastTry: ' + lastTrie);
+      console.log('score: ' + score);
 
-    tileFlip(selTilesFront, selTilesBack, '', backTile);
-
-    if ( selTilesFront.length == 2 ) {
-      tileEventListener('remove');
     }
   }
-
 }

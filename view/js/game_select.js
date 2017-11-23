@@ -1,6 +1,6 @@
 function selectGame () {
 
-	start_text.style.opacity = 0;
+	//start_text.style.opacity = 0;
 
 	var ajaxSelectGame = new XMLHttpRequest();
 	ajaxSelectGame.open('POST', '/selectgame', false);

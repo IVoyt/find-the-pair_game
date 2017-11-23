@@ -2,9 +2,9 @@
 
   class C_Startgame extends Main {
 
-    function __construct ($name)
+    function __construct ($template_name)
     {
-      parent::__construct($name);
+      parent::__construct($template_name);
       $this->index();
     }
 
@@ -37,7 +37,7 @@
         }
 
         $_SESSION['player_id'] = $playerID;
-        $game->newGame($playerID['player_id'], $fieldID);
+
         $fieldsize = $game->getFieldSizeById($fieldID);
 
         $shuffle1 = range(1, $fieldsize['fieldsize']);
@@ -51,6 +51,7 @@
         }
 
         $this->data['field_size'] = $fieldsize['fieldsize'];
+        $this->data['field_id']   = $fieldsize['id'];
         $this->data['player_id']  = $playerID['player_id'];
         $this->data['numbers']    = $numbers;
 
