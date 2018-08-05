@@ -1,9 +1,12 @@
 <?php
+    use app\RouterController;
 
-  require_once 'config.php';
-  require_once C_DIR . 'main.php';
-  require_once C_DIR . 'c_header.php';
-  require_once C_DIR . 'c_footer.php';
-  require_once M_DIR . 'db.php';
+    ini_set('display_errors', 1);
+    ini_set('display_startup_errors', 1);
+    error_reporting(E_ALL & ~E_NOTICE);
+    error_reporting(E_ALL);
 
-  require_once 'router.php';
+    require_once 'config.php';
+    require_once 'autoload.php';
+
+    new RouterController();
