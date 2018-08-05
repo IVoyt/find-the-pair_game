@@ -5,13 +5,19 @@
     class Game extends DB
     {
 
-        function getPlayerId($player)
+        function getPlayerById($player_id)
+        {
+            $query = $this->db->query("SELECT * FROM `players` WHERE `player_id` = '". $player_id ."'");
+            return $query->fetch(\PDO::FETCH_ASSOC);
+        }
+
+        function getPlayerIdByName($player)
         {
             $query = $this->db->query(
                 "SELECT player_id
-                FROM players
-                WHERE player_name = '". $player ."'
-                ORDER BY player_id
+                FROM `players`
+                WHERE `player_name` = '". $player ."'
+                ORDER BY `player_id`
                 DESC LIMIT 0,1");
 
             return $query->fetch(\PDO::FETCH_ASSOC);
@@ -25,7 +31,7 @@
 
         function addPlayer($player_name)
         {
-            $this->insert('players', $player_name);
+            $this->insert('players', ['player_name' => $player_name]);
             return $this->getLastPlayerId();
         }
 
@@ -62,16 +68,12 @@
 
         function setPlayerScore($player_id, $field_id, $score, $time)
         {
-            if($stmt = $this->db->prepare("INSERT INTO game (`player_id`, `field_id`, `game_score`, `game_time`, `game_date`) 
-                  VALUES (?,?,?,?,CURRENT_DATE())")
-            ) {
-                $stmt->bind_param('iiii', $player_id, $field_id, $score, $time);
-                $stmt->execute();
-                $stmt->close();
-            } else {
-                $error = $this->db->errno . ' ' . $this->db->error;
-                echo $error;
-            }
+            return $this->insert('game', [
+                'player_id'     => (int) $player_id,
+                'field_id'      => (int) $field_id,
+                'game_score'    => (int) $score,
+                'game_time'     => (int) $time
+            ]);
         }
 
     }

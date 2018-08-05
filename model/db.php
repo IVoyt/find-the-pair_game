@@ -41,11 +41,11 @@
             $prepareValues = '';
             foreach ($insert as $name => $value) {
                 if ($i > 0) {
-                    $insertArgs .= ',';
-                    $prepareValues .= ',';
+                    $insertArgs .= ', ';
+                    $prepareValues .= ', ';
                 }
-                $insertArgs .= $name;
-                $prepareValues .= '?';
+                $insertArgs .= '`'.$name.'`';
+                $prepareValues .= ':'.$name;
                 $i++;
                 if (gettype($value) == 'integer') {
                     $type = \PDO::PARAM_INT;
@@ -53,10 +53,13 @@
                     $type = \PDO::PARAM_STR;
                 }
                 $insertValues[] = ['val' => trim(strip_tags($value)), 'type' => $type];
+
+                $replaceValues[':'.$name] = $value;
             }
+
             $prepare = $this->db->prepare("INSERT INTO `". $table ."` (". $insertArgs .") VALUES (". $prepareValues . ")");
 
-            return $prepare->execute();
+            return $prepare->execute($replaceValues);
         }
 
 
