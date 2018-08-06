@@ -36,55 +36,67 @@ function selectFieldSize (elm) {
 
 
 function calculateFieldSize () {
-    var fieldSize = document.getElementById('field-size');
-    var field = document.getElementById('field');
-    var tiles = document.getElementsByClassName('cards');
-    var margin = window.getComputedStyle(tiles[0]).getPropertyValue('margin');
-    var padding = window.getComputedStyle(field).getPropertyValue('padding');
-    margin = parseInt(margin.replace(/px/,''));
-    padding = parseInt(padding.replace(/px/,''));
+    var fieldSize       = document.getElementById('field-size');
+    var field           = document.getElementById('field');
+    var fieldContainer  = document.getElementById('fieldContainer');
+    var gameField       = document.getElementById('gameField');
+    var tiles           = document.getElementsByClassName('cards');
+    var tilesCount      = tiles.length;
+    var fieldWidth      = window.getComputedStyle(field).getPropertyValue('width');
+    var fieldHeight     = window.getComputedStyle(field).getPropertyValue('height');
+    var margin          = window.getComputedStyle(tiles[0]).getPropertyValue('margin');
+    fieldWidth          = parseInt(fieldWidth.replace(/px/,''));
+    fieldHeight         = parseInt(fieldHeight.replace(/px/,''));
+    margin              = parseInt(margin.replace(/px/,''));
 
-    console.log('Field Size is ' + fieldSize.value);
-    console.log('Field padding is ' + padding);
-    console.log('Tile margin is ' + margin);
+    // console.log('Field Size: ' + fieldSize.value);
+    // console.log('Field width: ' + fieldWidth);
+    // console.log('Field height: ' + fieldHeight);
+    // console.log('Tile margin: ' + margin);
+    // console.log('Tiles count: ' + tilesCount);
 
+    var tileSize;
+    var itemsInRow = fieldSize.value / 2;
+    if (itemsInRow < 4) itemsInRow = 4;
+    if (fieldWidth >= fieldHeight) {
+        fieldContainer.style.width      = fieldHeight + 'px';
+        fieldContainer.style.height     = fieldHeight + 'px';
+        fieldContainer.style.marginLeft = ((fieldWidth - fieldHeight) / 2) + 'px';
+        fieldContainer.style.marginTop  = 0;
+        gameField.style.width           = fieldHeight + 'px';
+        console.log('(' + fieldHeight + ' - ' + '(' + itemsInRow + ' * (' + margin + ' * 2)) / ' + itemsInRow + ') = '
+            + ((fieldHeight - (itemsInRow * margin * 2)) / itemsInRow));
 
-    tileWidthSumm = parseInt( (fieldSize.value * 2) * (field.offsetWidth / fieldSize.value) - (fieldSize.value * margin) );
-    tileHeightSumm = parseInt( (fieldSize.value * 2) * (field.offsetHeight / fieldSize.value) - (fieldSize.value * margin) );
-    //var tileWidth = parseInt( ((field.offsetWidth / (fieldSize.value * 2)) - (2 * (margin + padding))) * 4);
-    var tileWidth = parseInt( ((field.offsetHeight / (fieldSize.value * 2)) - (2 * (margin + padding))) * 4);
-    //var tileHeight = parseInt( ((field.offsetHeight / (fieldSize.value * 2)) - (2 * (margin + padding))) * 4);
-    var tileHeight = parseInt( ((field.offsetWidth / (fieldSize.value * 2)) - (2 * (margin + padding))) * 4);
+        tileSize = ((fieldHeight - (itemsInRow * margin * 2)) / itemsInRow) - 4;
 
-    console.log('field.offsetHeight is ' + field.offsetHeight);
-
-    console.log('Tile width is ' + tileWidth);
-    console.log('Tile height is ' + tileHeight);
-    console.log('Tile width summ is ' + tileWidthSumm);
-    console.log('Tile height summ is ' + tileHeightSumm);
-    console.log('Field width is ' + field.offsetWidth);
-    console.log('Field height is ' + field.offsetHeight);
-    console.log('window width is ' + window.innerWidth);
-    console.log('window height is ' + window.innerHeight);
-
-    if (window.offsetWidth !== field.offsetWidth || window.offsetHeight !== field.offsetHeight) {
-        if (tileWidthSumm < tileHeightSumm) {
-            //tileWidth = tileWidth - (tileHeightSumm - tileWidthSumm) / 2;
-            for(i = 0; i < tiles.length; i++) {
-                tiles[i].style.width = tileWidth + 'px';
-                tiles[i].style.height = tileWidth + 'px';
-            }
-            console.log('tileWidth < tileHeight');
+        for(i = 0; i < tilesCount; i++) {
+            tiles[i].style.width = tileSize + 'px';
+            tiles[i].style.height = tileSize + 'px';
         }
-        else {
-            for(i = 0; i < tiles.length; i++) {
-                tiles[i].style.width = tileHeight + 'px';
-                tiles[i].style.height = tileHeight + 'px';
-            }
-            console.log('tileWidth > tileHeight');
+    } else {
+        fieldContainer.style.width      = fieldWidth + 'px';
+        fieldContainer.style.height     = fieldWidth + 'px';
+        fieldContainer.style.marginLeft = 0;
+        fieldContainer.style.marginTop  = ((fieldHeight - fieldWidth) / 2) + 'px';
+        gameField.style.width           = fieldWidth + 'px';
+
+        tileSize = ((fieldWidth - (itemsInRow * margin * 2)) / itemsInRow) - 4;
+
+        for(i = 0; i < tilesCount; i++) {
+            tiles[i].style.width = tileSize + 'px';
+            tiles[i].style.height = tileSize + 'px';
         }
     }
 
+    var gameFieldHeight = window.getComputedStyle(gameField).getPropertyValue('height');
+    var gameFieldWidth  = window.getComputedStyle(gameField).getPropertyValue('width');
+    gameFieldHeight     = parseInt(gameFieldHeight.replace(/px/,''));
+    gameFieldWidth      = parseInt(gameFieldWidth.replace(/px/,''));
+    if (gameFieldWidth >= gameFieldHeight) {
+        gameField.style.marginTop = ((gameFieldWidth - gameFieldHeight) / 2) + 'px';
+    } else {
+        gameField.style.marginTop = ((gameFieldHeight - gameFieldWidth) / 2) + 'px';
+    }
 
 }
 
