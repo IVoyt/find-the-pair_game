@@ -140,7 +140,7 @@
                 require(DIR_VIEW . '/' . $this->view);
                 $body_content = ob_get_clean();
 
-                if ($this->layout != null) {
+                if ($this->layout != false) {
                     require_once DIR_VIEW . '/layouts/' . $this->layout . '.php';
                 } else {
                     require_once DIR_VIEW . '/layouts/empty.php';
