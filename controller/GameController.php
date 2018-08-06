@@ -21,14 +21,15 @@
 
 
             if (!empty($_POST['player_name']) && !empty($_POST['field_size'])) {
-
+                $this->layout = false;
                 $playerName = trim(strip_tags($_POST['player_name']));
                 $fieldID = trim(strip_tags($_POST['field_size']));
+
                 $_SESSION['player_name'] = $_POST['player_name'];
                 $_SESSION['field_size'] = $_POST['field_size'];
 
                 $game = new Game();
-                $playerID = $game->getPlayerId($playerName);
+                $playerID = $game->getPlayerIdByName($playerName);
 
                 if ($playerID['player_id'] == '') {
                     $playerID = $game->addPlayer($playerName);
@@ -70,7 +71,7 @@
             } else {
                 echo 'No data!';
             }
-
+            return 0;
         }
 
     }
