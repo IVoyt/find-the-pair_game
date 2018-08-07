@@ -2,13 +2,10 @@
  * sends game data and starts game
  */
 function startGame () {
-    console.log('function "startGame()" executing');
     var sendPlayerName  = document.getElementById('enter-player-name').value;
     var fieldSize       = document.querySelector('.select-field-size-selected');
     var postBody        = 'player_name=' + sendPlayerName + '&field_size=' + fieldSize.dataset.fieldsize;
     var ajaxStartGame   = new XMLHttpRequest();
-
-    // postBody = 'player_name=qwe&field_size=1';
 
     ajaxStartGame.open('POST', '/game/start', false);
     ajaxStartGame.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
@@ -55,7 +52,6 @@ function startGame () {
  * sends game data and restarts game
  */
 function restartGame() {
-    console.log('function "restartGame()" executing');
     var ajaxReStartGame = new XMLHttpRequest();
     var postBody = 'restart=1';
 
@@ -125,6 +121,7 @@ function scoring() {
             var hasClass = selTilesBack[i].getAttribute('class');
             if (!(hasClass.match(/opened/))) {
                 selTilesBack[i].className = hasClass + ' opened';
+                selTilesBack[i].removeEventListener('click', tileOnClick, false);
             }
         }
         var stopGame = checkAllOpened();

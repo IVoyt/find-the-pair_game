@@ -7,7 +7,10 @@
 function tileEventListener(mode) {
     for (var i = 0; i < tiles.length; i++) {
         if (mode === true) {
-            tiles[i].addEventListener('click', tileOnClick, false);
+            var hasClass = tiles[i].getAttribute('class');
+            if (!(hasClass.match(/opened/))) {
+                tiles[i].addEventListener('click', tileOnClick, false);
+            }
         } else {
             tiles[i].removeEventListener('click', tileOnClick, false);
         }
@@ -25,10 +28,6 @@ function tileOnClick () {
 			var backTile = child;
 		}
 	}
-
-    // console.log(childrenCount);
-    // console.log(frontTile);
-    // console.log(backTile);
 
     if (selTilesFront.length < 2) {
     frontTile.style.zIndex = 0;
@@ -59,10 +58,6 @@ function tileOnClick () {
  * @param mode : string
  */
 function tileFlip(front, back, mode) {
-    console.log(front);
-    console.log(back);
-    console.log(mode);
-
     var len = front.length;
 
     var i = 0;
