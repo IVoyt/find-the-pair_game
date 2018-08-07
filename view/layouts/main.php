@@ -43,34 +43,37 @@
                 <div id="game-bg-text"> <?=$msg['choose_background']?> </div>
             </div>
 
-            <div id="player-text"> <?=$msg['player_name']?>: </div>
-            <div id="player-name"></div>
+            <div id="game-summary">
+                <div id="player-text"> <?=$msg['player_name']?>: </div>
+                <div id="player-name"></div>
 
-            <div class="game-info">
-                <div id="game-time">
-                    <div id="game-time-text"> <?=$msg['time']?>: </div>
-                    <div id="game-time-num">
-                        <div id="game-time-min">00</div>
-                        <div id="game-time-separator">:</div>
-                        <div id="game-time-sec">00</div>
+                <div class="game-info">
+                    <div id="game-time">
+                        <div id="game-time-text"> <?=$msg['time']?>: </div>
+                        <div id="game-time-num">
+                            <div id="game-time-min">00</div>
+                            <div id="game-time-separator">:</div>
+                            <div id="game-time-sec">00</div>
+                        </div>
+                    </div>
+
+                    <div id="game-moves">
+                        <div id="game-moves-text"> <?=$msg['moves']?>: </div>
+                        <div id="game-moves-num">0</div>
+                    </div>
+
+                    <div id="game-found">
+                        <div id="game-found-text"> <?=$msg['found']?>: </div>
+                        <div id="game-found-num">0 / 0</div>
+                    </div>
+
+                    <div id="game-score">
+                        <div id="game-score-text"> <?=$msg['score']?>: </div>
+                        <div id="game-score-num">0</div>
                     </div>
                 </div>
-
-                <div id="game-moves">
-                    <div id="game-moves-text"> <?=$msg['moves']?>: </div>
-                    <div id="game-moves-num">0</div>
-                </div>
-
-                <div id="game-found">
-                    <div id="game-found-text"> <?=$msg['found']?>: </div>
-                    <div id="game-found-num">0 / 0</div>
-                </div>
-
-                <div id="game-score">
-                    <div id="game-score-text"> <?=$msg['score']?>: </div>
-                    <div id="game-score-num">0</div>
-                </div>
             </div>
+
 
             <div id="backgrounds">
                 <div id="arrow"></div>

@@ -173,6 +173,14 @@ body {
     cursor: pointer;
 }
 
+#game-summary {
+    background-color: #fff;
+    height: 100%;
+    width: calc(100% - 100px);
+    z-index: 6;
+    margin-left: 100px;
+}
+
 #game-bg, #header-separator, #player-text, #player-name, .game-info {
     top: 50%;
     transform: translateY(-50%);
@@ -234,7 +242,7 @@ body {
     display: inline-block;
 }
 
-#game-moves, #game-found, #game-score, #game-time {
+.game-info > div {
     margin: 0 0 0 20px;
 }
 
@@ -261,11 +269,16 @@ body {
     position: absolute;
 }
 
-#start-block {
+#start-block-container {
     position: absolute;
     top: 50%;
+    width: 100%;
+}
+
+#start-block {
     transform: perspective(10px) translate3d(0, -75%, -5px);
-    left: 12.5%;
+    margin: auto;
+    max-width: 500px;
     width: 75%;
     height: 300px;
     border-radius: 5px;
@@ -286,10 +299,8 @@ body {
 #select-game {
     position: relative;
     padding: 25px 0 25px 0;
-    top: 50%;
-    transform: translateY(-50%);
     width: 90%;
-    margin: 0 0 0 5%;
+    margin: auto;
     text-align: center;
     font-size: 20px;
     color: #555;
@@ -440,6 +451,10 @@ div.card {
     opacity: 1;
 }
 
+.opened {
+    cursor: default !important;
+}
+
 .card1 {
     background: #ffffff;
 }
@@ -502,6 +517,7 @@ div.card {
     position: absolute;
     width: 125px;
     top: 50%;
+    font-size: 16px;
     transform: translateY(-50%);
 }
 
@@ -665,3 +681,84 @@ div.card {
 .highscores-table tr:nth-child(odd) td { background: #FEFEFE; }
 
 .highscores-table tr td:hover { background: #666; color: #FFF; } /* Hover cell effect! */
+
+
+@media screen and (max-width: 1024px) {
+    #header {
+        font-size: 20px;
+    }
+}
+
+@media screen and (max-width: 900px) {
+    #header {
+        font-size: 18px;
+    }
+}
+
+@media screen and (max-width: 800px) {
+    #header {
+        font-size: 16px;
+    }
+    .game-info > div {
+        margin: 0 0 0 10px;
+    }
+    #game-bg-text, #highscores-trigger-text {
+        font-size: 14px;
+    }
+}
+
+@media screen and (max-width: 725px) {
+    .game-info > div {
+        margin: 0;
+    }
+    #game-time-num {
+        margin-left: 0;
+    }
+    #start-block {
+        height: 280px;
+    }
+    #select-game input {
+        height: 30px;
+        font-size: 18px;
+    }
+    #select-game {
+        font-size: 18px;
+    }
+}
+
+@media screen and (max-width: 650px) {
+    #header {
+        font-size: 14px;
+    }
+    #game-bg-text, #highscores-trigger-text {
+        font-size: 14px;
+    }
+    #start-block {
+        height: 260px;
+    }
+    #select-game input {
+        height: 25px;
+        font-size: 16px;
+    }
+    #select-game {
+        font-size: 16px;
+    }
+}
+
+@media screen and (max-width: 650px) {
+    #header {
+        font-size: 12px;
+    }
+    #game-bg-text, #highscores-trigger-text {
+        font-size: 12px;
+    }
+}
+
+@media screen and (max-width: 410px){
+    #start-block {
+        height: 240px;
+    }
+    #select-game {
+        font-size: 14px;
+    }
+}
