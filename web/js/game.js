@@ -35,6 +35,7 @@ function startGame () {
         setTimeout(function() {
             start_block.remove();
             content.innerHTML = ajaxStartGame.responseText;
+            window.addEventListener("resize", calculateFieldSize);
             setTimeout(function ()  {
                 var field                       = document.getElementById('field');
                 field.style.opacity             = 1;
@@ -66,6 +67,7 @@ function restartGame() {
         content.style.opacity = 0;
         setTimeout(function() {
             content.innerHTML = ajaxReStartGame.responseText;
+            window.addEventListener("resize", calculateFieldSize);
             checkFieldLoaded();
             setTimeout(function ()  {
                 var field = document.getElementById('field');
@@ -89,6 +91,7 @@ function scoring() {
         clearTimeout(timerFlipBack);
         timerFlipBack = setTimeout(function () {
             tileFlip(selTilesFront, selTilesBack, 'back');
+            tileEventListener(true);
         }, 2000);
         lastTrie++;
     } else {
