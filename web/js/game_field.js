@@ -103,4 +103,3 @@ function calculateFieldSize () {
 //window.onresize = function() {
 //  calculateFieldSize();
 //};
-window.addEventListener("resize", calculateFieldSize);
