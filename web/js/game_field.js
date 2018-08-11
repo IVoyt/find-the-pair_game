@@ -1,4 +1,10 @@
 var timerGameField;
+
+/**
+ * checking if game field is loaded
+ *
+ * return void
+ */
 function checkFieldLoaded () {
     if(document.getElementById('field') != null) {
         clearTimeout(timerGameField);
@@ -16,6 +22,7 @@ checkFieldLoaded();
 
 /**
  * @param elm : string
+ * return void
  */
 function selectFieldSize (elm) {
     var elms = document.getElementsByClassName('select-field-size');
@@ -34,7 +41,11 @@ function selectFieldSize (elm) {
 }
 
 
-
+/**
+ * calculating field & tiles sizes
+ *
+ * return void
+ */
 function calculateFieldSize () {
     var fieldSize       = document.getElementById('field-size');
     var field           = document.getElementById('field');
@@ -49,23 +60,16 @@ function calculateFieldSize () {
     fieldHeight         = parseInt(fieldHeight.replace(/px/,''));
     margin              = parseInt(margin.replace(/px/,''));
 
-    // console.log('Field Size: ' + fieldSize.value);
-    // console.log('Field width: ' + fieldWidth);
-    // console.log('Field height: ' + fieldHeight);
-    // console.log('Tile margin: ' + margin);
-    // console.log('Tiles count: ' + tilesCount);
-
     var tileSize;
     var itemsInRow = fieldSize.value / 2;
     if (itemsInRow < 4) itemsInRow = 4;
+
     if (fieldWidth >= fieldHeight) {
         fieldContainer.style.width      = fieldHeight + 'px';
         fieldContainer.style.height     = fieldHeight + 'px';
         fieldContainer.style.marginLeft = ((fieldWidth - fieldHeight) / 2) + 'px';
         fieldContainer.style.marginTop  = 0;
         gameField.style.width           = fieldHeight + 'px';
-        console.log('(' + fieldHeight + ' - ' + '(' + itemsInRow + ' * (' + margin + ' * 2)) / ' + itemsInRow + ') = '
-            + ((fieldHeight - (itemsInRow * margin * 2)) / itemsInRow));
 
         tileSize = ((fieldHeight - (itemsInRow * margin * 2)) / itemsInRow) - 4;
 
@@ -97,9 +101,4 @@ function calculateFieldSize () {
     } else {
         gameField.style.marginTop = ((gameFieldHeight - gameFieldWidth) / 2) + 'px';
     }
-
 }
-
-//window.onresize = function() {
-//  calculateFieldSize();
-//};
