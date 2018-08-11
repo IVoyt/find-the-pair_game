@@ -120,7 +120,6 @@
     <script src="<?= DIR_JS . '/' ?>background.js"></script>
     <script src="<?= DIR_JS . '/' ?>game_info.js"></script>
     <script src="<?= DIR_JS . '/' ?>game_field.js"></script>
-    <script src="<?= DIR_JS . '/' ?>game_select.js"></script>
     <script src="<?= DIR_JS . '/' ?>game.js"></script>
     <script src="<?= DIR_JS . '/' ?>tiles.js"></script>
     <script src="<?= DIR_JS . '/' ?>timer.js"></script>
