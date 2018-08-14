@@ -11,11 +11,6 @@
 
         <div id="select-game" style="opacity: 1; transition: opacity 0.7s ease-out 0s;">
             <div id="error-msg"></div>
-            <input id="enter-player-name"
-                   name="player_name"
-                   type="text"
-                   placeholder="<?= $msg['enter_player_name'] ?>"
-                   value="<?=(isset($_SESSION['player_name'])) ? $_SESSION['player_name'] : ''?>" required />
             <div id="select-field">
                 <?= $msg['choose_field_size']?>
             </div>

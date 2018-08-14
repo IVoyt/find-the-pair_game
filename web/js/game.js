@@ -2,13 +2,12 @@
  * sends game data and starts game
  */
 function startGame () {
-    var sendPlayerName  = document.getElementById('enter-player-name').value;
     var fieldSize       = document.querySelector('.select-field-size-selected');
     var fieldSizeData = '';
     if (fieldSize !== null) {
         fieldSizeData = fieldSize.dataset.fieldsize;
     }
-    var postBody        = 'player_name=' + sendPlayerName + '&field_size=' + fieldSizeData;
+    var postBody        = '&field_size=' + fieldSizeData;
     var ajaxStartGame   = new XMLHttpRequest();
 
     ajaxStartGame.timeout = 3000;
@@ -35,8 +34,6 @@ function startGame () {
                 start_block.style.opacity   = 0;
                 document.body.style.height  = '100vh';
 
-                var playerName = document.getElementById('player-name');
-
                 setTimeout(function() {
                     start_block.remove();
                     content.innerHTML = ajaxStartGame.responseText;
@@ -46,7 +43,6 @@ function startGame () {
                         field.style.opacity             = 1;
                         gameTriggerBtnText.innerHTML    = buttonText['pause'];
                         gameTriggerBtn.style.opacity    = 1;
-                        playerName.innerHTML            = sendPlayerName;
                         calculateFieldSize();
                         startTimer();
                     }, 300);

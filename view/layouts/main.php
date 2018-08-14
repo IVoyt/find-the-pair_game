@@ -44,8 +44,6 @@
             </div>
 
             <div id="game-summary">
-                <div id="player-text"> <?=$msg['player_name']?>: </div>
-                <div id="player-name"></div>
 
                 <div class="game-info">
                     <div id="game-time">
