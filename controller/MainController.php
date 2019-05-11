@@ -9,6 +9,9 @@
 
         public function indexAction()
         {
+            if (isset($_POST['restart']) && $_POST['restart'] == 1) {
+                $this->layout = false;
+            }
             $q = new Game();
             $field_sizes = $q->getFieldSizes();
             $this->data['field_size'] = $field_sizes;

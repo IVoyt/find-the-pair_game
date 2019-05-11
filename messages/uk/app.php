@@ -14,7 +14,7 @@
         'choose_background' => 'Обрати фон',
         'time'              => 'Час',
         'found'             => 'Знайдено',
-        'moves'             => 'Ходів',
+        'moves'             => 'Ходи',
         'game_pause'        => 'Пауза',
         'game_continue'     => 'Продовжити',
         'game_restart'      => 'Почати зпочатку',

@@ -11,9 +11,7 @@
 <div id="highscores-modal">
 
     <div id="highscores-modal-header"> <?=$msg['high_scores']?>
-        <img src="<?=DIR_WEB?>/img/close1.png"
-             id="close-modal"
-             onclick="closeHighscoresModal(document.getElementById('highscores-modal'));" />
+        <img src="<?php echo DIR_WEB?>/img/close1.png" id="close-modal" />
     </div>
 
     <div id="highscores-modal-content">

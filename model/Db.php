@@ -2,10 +2,10 @@
 
     namespace app\model;
 
-    class DB
+    class Db
     {
 
-        const DB_HOST = 'localhost';
+        const DB_HOST = '192.168.10.105';
         const DB_USER = 'root';
         const DB_PASS = '123';
         const DB_NAME = 'find_the_pair';
@@ -45,16 +45,10 @@
                     $prepareValues .= ', ';
                 }
                 $insertArgs .= '`'.$name.'`';
-                $prepareValues .= ':'.$name;
+                $prepareValues .= '?';
                 $i++;
-                if (gettype($value) == 'integer') {
-                    $type = \PDO::PARAM_INT;
-                } else if (gettype($value) == 'string') {
-                    $type = \PDO::PARAM_STR;
-                }
-                $insertValues[] = ['val' => trim(strip_tags($value)), 'type' => $type];
 
-                $replaceValues[':'.$name] = $value;
+                $replaceValues[] = $value;
             }
 
             $prepare = $this->db->prepare("INSERT INTO `". $table ."` (". $insertArgs .") VALUES (". $prepareValues . ")");
