@@ -82,6 +82,17 @@
         }
 
         /**
+         * @param $html
+         * @return mixed|string|string[]|null
+         */
+        private function htmlMinify($html)
+        {
+            $html = preg_replace('/(\>)\s*(\S*)\s*(\<)/si', '$1$2$3', $html);
+
+            return $html;
+        }
+
+        /**
          * @param null $route
          */
         private function beforeRender($route = null)
@@ -140,16 +151,22 @@
                 require(DIR_VIEW . '/' . $this->view);
                 $body_content = ob_get_clean();
 
+                ob_start();
                 if ($this->layout != false) {
                     require_once DIR_VIEW . '/layouts/' . $this->layout . '.php';
                 } else {
                     require_once DIR_VIEW . '/layouts/empty.php';
                 }
+                $layout = ob_get_clean();
+                $layout = $this->htmlMinify($layout);
             }
             catch (\Exception $e) {
 //                echo 'Поймано исключение: ',  $e->getMessage(), "\n";
                 $this->ThrowNotFound();
             }
+
+            echo $layout;
+            $body_content = $this->htmlMinify($body_content);
             return $body_content;
         }
 
